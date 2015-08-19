@@ -8,14 +8,14 @@ package com.marvinswolrd.center.reg;
 public class RegisterCenter {
 
     /**
-     * 注册节点
+     * 娉ㄥ唽鑺傜偣
      */
     public void regNode(){
 
     }
 
     /**
-     * 创建连接
+     * 鍒涘缓杩炴帴
      */
     public void createConnection(){
 
