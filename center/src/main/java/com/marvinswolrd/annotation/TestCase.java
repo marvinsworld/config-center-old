@@ -1,5 +1,6 @@
 package com.marvinswolrd.annotation;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.beans.IntrospectionException;
@@ -18,11 +19,11 @@ import java.lang.reflect.Method;
 @Service
 public class TestCase {
 
-    @DConfig(value = "aaa")
+    @DConfig("${bbb}")
     private String db;
 
-    //@Value("${bbb}")
-//    private String db2;
+    @Value("${bbb}")
+    private String db2;
 
     public void setDb(String db) {
         this.db = db;
@@ -42,8 +43,7 @@ public class TestCase {
 
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, IntrospectionException {
         TestCase use = new TestCase();
-        //Default注解的处理过程
-        //这里使用反射机制完成默认值的设置
+
         Field[] fileds = use.getClass().getDeclaredFields();
 
         for(Field filed : fileds){
