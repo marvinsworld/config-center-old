@@ -11,6 +11,7 @@
            http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
     <!-- mvc controller -->
+    <context:annotation-config />
     <context:component-scan base-package="com.marvinswolrd" />
 
 	<bean id="registerCenter" class="com.marvinswolrd.center.reg.RegisterCenter" init-method="init" />
@@ -24,5 +25,7 @@
             </list>
         </property>
     </bean>
+
+    <bean id="dConfigBeanPostProcessor" class="com.marvinswolrd.annotation.DConfigBeanPostProcessor"  />
 
 </beans>

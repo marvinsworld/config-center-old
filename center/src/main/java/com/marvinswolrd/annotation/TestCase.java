@@ -1,6 +1,5 @@
 package com.marvinswolrd.annotation;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.beans.IntrospectionException;
@@ -22,8 +21,8 @@ public class TestCase {
     @DConfig(value = "aaa")
     private String db;
 
-    @Value("${bbb}")
-    private String db2;
+    //@Value("${bbb}")
+//    private String db2;
 
     public void setDb(String db) {
         this.db = db;
@@ -33,13 +32,13 @@ public class TestCase {
         return db;
     }
 
-    public String getDb2() {
-        return db2;
-    }
-
-    public void setDb2(String db2) {
-        this.db2 = db2;
-    }
+//    public String getDb2() {
+//        return db2;
+//    }
+//
+//    public void setDb2(String db2) {
+//        this.db2 = db2;
+//    }
 
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException, IntrospectionException {
         TestCase use = new TestCase();

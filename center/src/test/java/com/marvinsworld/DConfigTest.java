@@ -24,6 +24,6 @@ public class DConfigTest {
 
     @Test
     public void test(){
-        System.out.printf(testCase.getDb2());
+        System.out.printf(testCase.getDb());
     }
 }
