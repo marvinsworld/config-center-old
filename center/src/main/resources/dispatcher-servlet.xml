@@ -11,8 +11,7 @@
     http://www.springframework.org/schema/aop/spring-aop.xsd"
        default-autowire="byName">
 
-    <!-- mvc controller -->
-    <context:component-scan base-package="com.marvinswolrd" />
+
     <context:annotation-config />
 
 </beans>
