@@ -9,4 +9,5 @@ package com.marvinswolrd.app;
 public interface AppService {
 
     public void getParam();
+
 }
