@@ -28,4 +28,13 @@
 
     <bean id="dConfigBeanPostProcessor" class="com.marvinswolrd.annotation.DConfigBeanPostProcessor"  />
 
+
+    <bean id="customAutowireConfigurer" class="org.springframework.beans.factory.annotation.CustomAutowireConfigurer">
+        <property name="customQualifierTypes">
+            <set>
+                <value>com.marvinswolrd.annotation.DConfig</value>
+            </set>
+        </property>
+    </bean>
+
 </beans>
