@@ -14,6 +14,11 @@
     <context:annotation-config />
     <context:component-scan base-package="com.marvinswolrd" />
 
+
+    <context:component-scan base-package="com.marvinswolrd">
+        <context:include-filter type="annotation" expression="com.marvinswolrd.annotation.DConfig" />
+    </context:component-scan>
+
 	<bean id="registerCenter" class="com.marvinswolrd.center.reg.RegisterCenter" init-method="init" />
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -26,15 +31,16 @@
         </property>
     </bean>
 
-    <bean id="dConfigBeanPostProcessor" class="com.marvinswolrd.annotation.DConfigBeanPostProcessor"  />
+    <!--<bean id="dConfigBeanPostProcessor" class="com.marvinswolrd.annotation.DConfigBeanPostProcessor"  />-->
+    <bean id="dConfigBeanFactoryPostProcessor" class="com.marvinswolrd.annotation.DConfigBeanFactoryPostProcessor"  />
 
 
-    <bean id="customAutowireConfigurer" class="org.springframework.beans.factory.annotation.CustomAutowireConfigurer">
-        <property name="customQualifierTypes">
-            <set>
-                <value>com.marvinswolrd.annotation.DConfig</value>
-            </set>
-        </property>
-    </bean>
+    <!--<bean id="customAutowireConfigurer" class="org.springframework.beans.factory.annotation.CustomAutowireConfigurer">-->
+        <!--<property name="customQualifierTypes">-->
+            <!--<set>-->
+                <!--<value>com.marvinswolrd.annotation.DConfig</value>-->
+            <!--</set>-->
+        <!--</property>-->
+    <!--</bean>-->
 
 </beans>
