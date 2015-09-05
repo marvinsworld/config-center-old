@@ -3,7 +3,9 @@ package com.marvinswolrd.dconfig.annotation;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 import java.io.InputStream;
@@ -19,6 +21,13 @@ class DConfigPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer
     public DConfigPropertyPlaceholderConfigurer(String... files) {
         Preconditions.checkArgument((files != null) && (files.length > 0), "DConfig files property must be not null!");
         this.files = files;
+    }
+
+    @Override
+    protected void processProperties(ConfigurableListableBeanFactory beanFactoryToProcess, Properties props) throws BeansException {
+
+
+        super.processProperties(beanFactoryToProcess, props);
     }
 
     public void afterPropertiesSet() throws Exception {
