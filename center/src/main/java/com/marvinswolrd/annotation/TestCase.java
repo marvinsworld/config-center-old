@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
 @Service
 public class TestCase {
 
-    @DConfig("${bbb}")
+    @DConfig(value="bbb")
     private String db;
 
     @Value("${bbb}")

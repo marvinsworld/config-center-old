@@ -1,13 +1,14 @@
 package com.marvinswolrd.annotation;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Properties;
 
 /**
  * Description:
@@ -15,11 +16,12 @@ import java.lang.reflect.Modifier;
  * @author Marvinsworld
  * @since 2015/8/31 23:00
  */
-public class DConfigBeanFactoryPostProcessor implements BeanFactoryPostProcessor, BeanPostProcessor {
+public class DConfigBeanFactoryPostProcessor extends PropertyPlaceholderConfigurer
+        implements BeanPostProcessor {
 
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        //beanFactory.get
-    }
+
+    //private java.util.Properties mergedProps;
+
 
     public Object postProcessBeforeInitialization(Object bean, String beanName)
             throws BeansException {
@@ -52,6 +54,10 @@ public class DConfigBeanFactoryPostProcessor implements BeanFactoryPostProcessor
                 }
                 DConfig reference = field.getAnnotation(DConfig.class);
                 if (reference != null) {
+
+                    //processProperties(this.beanFactory, Properties props);
+                    String aaa = props.getProperty(reference.value());
+                    System.out.println("----------------------"+aaa);
                     Object value = "11111";
                     if (value != null) {
                         field.set(bean, value);
@@ -66,6 +72,37 @@ public class DConfigBeanFactoryPostProcessor implements BeanFactoryPostProcessor
 
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         return bean;
+    }
+
+
+//    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+//        try {
+//            mergedProps = mergeProperties();
+//
+//            // Convert the merged properties, if necessary.
+//            convertProperties(mergedProps);
+//
+//            // Let the subclass process the properties.
+//            processProperties(beanFactory, mergedProps);
+//        }
+//        catch (IOException ex) {
+//            throw new BeanInitializationException("Could not load properties", ex);
+//        }
+//    }
+
+
+    private Properties props;
+
+    @Override
+    protected void processProperties(
+            ConfigurableListableBeanFactory beanFactoryToProcess,
+            Properties props) throws BeansException {
+        super.processProperties(beanFactoryToProcess, props);
+        this.props=props;
+    }
+
+    public Object getProperty(String key) {
+        return props.getProperty(key);
     }
 
 
