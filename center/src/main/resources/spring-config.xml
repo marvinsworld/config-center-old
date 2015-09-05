@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="
-           http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:dconfig="http://www.dmall.com/schema/dconfig"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.1.xsd
            http://www.springframework.org/schema/aop
-           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.dmall.com/schema/dconfig
+           http://www.dmall.com/schema/dconfig.xsd">
 
     <!-- mvc controller -->
     <context:annotation-config />
@@ -16,7 +17,7 @@
 
 
     <context:component-scan base-package="com.marvinswolrd">
-        <context:include-filter type="annotation" expression="com.marvinswolrd.annotation.DConfig" />
+        <context:include-filter type="annotation" expression="com.marvinswolrd.dconfig.annotation.DConfig" />
     </context:component-scan>
 
 	<bean id="registerCenter" class="com.marvinswolrd.center.reg.RegisterCenter" init-method="init" />
@@ -31,22 +32,27 @@
         </property>
     </bean>
 
-    <!--<bean id="dConfigBeanPostProcessor" class="com.marvinswolrd.annotation.DConfigBeanPostProcessor"  />-->
-    <bean id="dConfigBeanFactoryPostProcessor" class="com.marvinswolrd.annotation.DConfigBeanFactoryPostProcessor">
-        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
-        <property name="ignoreResourceNotFound" value="true"/>
-        <property name="locations">
-            <list>
-                <value>classpath:test.properties</value>
-            </list>
-        </property>
-    </bean>
+    <dconfig:config files="test.properties" />
+
+    <!--<bean id="dConfigBeanPostProcessor" class="com.marvinswolrd.dconfig.annotation.DConfigAnnotationProcessor"  />-->
+
+
+
+    <!--<bean id="dConfigBeanFactoryPostProcessor" class="com.marvinswolrd.annotation.DConfigBeanFactoryPostProcessor">-->
+        <!--<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>-->
+        <!--<property name="ignoreResourceNotFound" value="true"/>-->
+        <!--<property name="locations">-->
+            <!--<list>-->
+                <!--<value>classpath:test.properties</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
 
 
     <!--<bean id="customAutowireConfigurer" class="org.springframework.beans.factory.annotation.CustomAutowireConfigurer">-->
         <!--<property name="customQualifierTypes">-->
             <!--<set>-->
-                <!--<value>com.marvinswolrd.annotation.DConfig</value>-->
+                <!--<value>com.marvinswolrd.dconfig.annotation.DConfig</value>-->
             <!--</set>-->
         <!--</property>-->
     <!--</bean>-->

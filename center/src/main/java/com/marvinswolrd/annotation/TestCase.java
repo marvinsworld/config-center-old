@@ -1,5 +1,6 @@
 package com.marvinswolrd.annotation;
 
+import com.marvinswolrd.dconfig.annotation.DConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ import java.lang.reflect.Method;
 @Service
 public class TestCase {
 
-    @DConfig(value="bbb")
+    @DConfig("bbb")
     private String db;
 
     @Value("${bbb}")

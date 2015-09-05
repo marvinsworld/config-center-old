@@ -1,5 +1,6 @@
 package com.marvinswolrd.annotation;
 
+import com.marvinswolrd.dconfig.annotation.DConfig;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
