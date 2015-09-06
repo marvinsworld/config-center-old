@@ -1,7 +1,6 @@
 package com.marvinswolrd.annotation;
 
 import com.marvinswolrd.dconfig.annotation.DConfig;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.beans.IntrospectionException;
@@ -23,10 +22,10 @@ public class TestCase {
     @DConfig("bbb")
     private String db;
 
-    @DConfig("${bbb}")
+    @DConfig("${aaa}")
     private String db1;
 
-    @Value("${bbb}")
+    @DConfig("${bbb}")
     private String db2;
 
     public void setDb(String db) {
