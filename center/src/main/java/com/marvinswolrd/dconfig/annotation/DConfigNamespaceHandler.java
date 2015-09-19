@@ -14,9 +14,9 @@ class DConfigNamespaceHandler extends NamespaceHandlerSupport {
 
     static class Parser extends AbstractSingleBeanDefinitionParser {
         protected Class<?> getBeanClass(Element element) {
-            if (element.getLocalName().equals("config")) {
-                return DConfigPropertyPlaceholderConfigurer.class;
-            }
+//            if (element.getLocalName().equals("config")) {
+//                return DConfigPropertyPlaceholderConfigurer.class;
+//            }
             return DConfigAnnotationProcessor.class;
         }
 
@@ -33,14 +33,14 @@ class DConfigNamespaceHandler extends NamespaceHandlerSupport {
                 String[] ids = StringUtils.commaDelimitedListToStringArray(location);
                 builder.addConstructorArgValue(ids);
             }
-            String order = element.getAttribute("order");
-            if (StringUtils.hasLength(order)) {
-                builder.addPropertyValue("order", Integer.valueOf(order));
-            }
-            builder.addPropertyValue("timeout", Integer.valueOf(element.getAttribute("timeout")));
-            builder.addPropertyValue("ignoreResourceNotFound", Boolean.valueOf(element.getAttribute("ignore-resource-not-found")));
-
-            builder.addPropertyValue("ignoreUnresolvablePlaceholders", Boolean.valueOf(element.getAttribute("ignore-unresolvable")));
+//            String order = element.getAttribute("order");
+//            if (StringUtils.hasLength(order)) {
+//                builder.addPropertyValue("order", Integer.valueOf(order));
+//            }
+//            builder.addPropertyValue("timeout", Integer.valueOf(element.getAttribute("timeout")));
+//            builder.addPropertyValue("ignoreResourceNotFound", Boolean.valueOf(element.getAttribute("ignore-resource-not-found")));
+//
+//            builder.addPropertyValue("ignoreUnresolvablePlaceholders", Boolean.valueOf(element.getAttribute("ignore-unresolvable")));
         }
     }
 }

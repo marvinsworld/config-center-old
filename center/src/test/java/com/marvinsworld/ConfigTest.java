@@ -1,6 +1,6 @@
 package com.marvinsworld;
 
-import com.marvinswolrd.annotation.DConfigBean;
+import com.marvinswolrd.demo.ConfigBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,13 +17,13 @@ import javax.annotation.Resource;
  */
 @ContextConfiguration({"classpath:spring-config.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
-public class DConfigTest {
+public class ConfigTest {
 
     @Resource
-    private DConfigBean dConfigBean;
+    private ConfigBean configBean;
 
     @Test
     public void test(){
-        System.out.print(dConfigBean);
+        System.out.print(configBean);
     }
 }
