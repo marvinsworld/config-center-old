@@ -8,15 +8,13 @@ import org.w3c.dom.Element;
 
 class DConfigNamespaceHandler extends NamespaceHandlerSupport {
     public void init() {
+        //匹配两种dconfig:config和dconfig:annotation-driven
         registerBeanDefinitionParser("config", new Parser());
         registerBeanDefinitionParser("annotation-driven", new Parser());
     }
 
     static class Parser extends AbstractSingleBeanDefinitionParser {
         protected Class<?> getBeanClass(Element element) {
-//            if (element.getLocalName().equals("config")) {
-//                return DConfigPropertyPlaceholderConfigurer.class;
-//            }
             return DConfigAnnotationProcessor.class;
         }
 

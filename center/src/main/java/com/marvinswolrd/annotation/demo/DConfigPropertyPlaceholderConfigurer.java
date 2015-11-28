@@ -1,4 +1,4 @@
-package com.marvinswolrd.dconfig.annotation;
+package com.marvinswolrd.annotation.demo;
 
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
@@ -36,7 +36,7 @@ class DConfigPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer
         Properties[] arr = new Properties[1];
 
         Properties props = new Properties();
-        InputStream in =  this.getClass().getClassLoader().getResourceAsStream("test.properties");
+        InputStream in =  this.getClass().getClassLoader().getResourceAsStream("dconfig1.properties");
         props.load(in);
         arr[0]=props;
         //mergeProperties();

@@ -1,4 +1,4 @@
-package com.marvinswolrd.demo;
+package com.marvinswolrd.annotation.demo;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;

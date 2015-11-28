@@ -1,6 +1,6 @@
 package com.marvinsworld;
 
-import com.marvinswolrd.annotation.DConfigBean;
+import com.marvinswolrd.dconfig.demo.DConfigBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,7 +23,9 @@ public class DConfigTest {
     private DConfigBean dConfigBean;
 
     @Test
-    public void test(){
-        System.out.print(dConfigBean);
+    public void test() {
+        System.out.println("db1=" + dConfigBean.getDb1());
+        System.out.println("db2=" + dConfigBean.getDb2());
+        System.out.println("db3=" + dConfigBean.getDb3());
     }
 }

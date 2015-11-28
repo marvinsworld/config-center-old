@@ -1,4 +1,4 @@
-package com.marvinswolrd.annotation.demo;
+package com.marvinswolrd.annotation.demo1;
 
 /**
  * 要使用SayHiAnnotation的元素所在类

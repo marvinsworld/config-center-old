@@ -1,4 +1,4 @@
-package com.marvinswolrd.annotation.demo;
+package com.marvinswolrd.annotation.demo1;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

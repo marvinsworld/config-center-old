@@ -2,12 +2,13 @@ package com.marvinswolrd.dconfig.annotation;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.ReflectionUtils;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -20,14 +21,13 @@ import java.util.Properties;
  * @version V1.0
  * @since 2015/8/23 15:57
  */
-public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProcessor// implements BeanPostProcessor
-{
-
+public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProcessor {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DConfigAnnotationProcessor.class);
 
     private final String[] files;
     private long timeout;
     private boolean ignoreResourceNotFound;
-    private Properties p;
+    private Properties properties;
 
     public void setTimeout(long timeout) {
         this.timeout = timeout;
@@ -53,22 +53,22 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
         Preconditions.checkArgument((files != null) && (files.length > 0), "DConfig files property must be not null!");
         this.files = files;
 
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("test.properties");
-        p = new Properties();
-        try{
-            p.load(inputStream);
-        } catch (IOException e1){
-            e1.printStackTrace();
+        properties = new Properties();
+        for (String file : files) {
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(file);
+            LOGGER.debug("DConfig loading file {}...", file);
+            try {
+                properties.load(inputStream);
+            } catch (Exception e) {
+                LOGGER.error("DConfig loading file error,please check the path of file {}!", file, e);
+            }
         }
-        System.out.println(p.getProperty("aaa"));
     }
-
 
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         //super.postProcessBeforeInitialization(bean,beanName);
         parseMethods(bean, bean.getClass().getDeclaredMethods());
         parseFields(bean, bean.getClass().getDeclaredFields());
-
         super.processInjection(bean);
         return bean;
     }
@@ -87,25 +87,25 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
         for (Field field : fields) {
             DConfig annotation = (DConfig) AnnotationUtils.getAnnotation(field, DConfig.class);
             if (annotation != null) {
-                String value = annotation.value();
+                String key = annotation.value();
 
-                if (Strings.isNullOrEmpty(value)) {
-                    throw new RuntimeException("DConfig must have a value!");
-                }else{
-
+                if (Strings.isNullOrEmpty(key)) {
+                    LOGGER.error("DConfig annotation key must have a name!");
+                    //throw new RuntimeException("DConfig must have a value!");
+                } else {
+                    ReflectionUtils.makeAccessible(field);
+                    String value = properties.getProperty(key);
                     try {
-                        ReflectionUtils.makeAccessible(field);
-                        field.set(bean, p.getProperty(value));
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
+                        if (!Strings.isNullOrEmpty(value)) {
+                            field.set(bean, value);
+                        }
+                    } catch (Exception e) {
+                        LOGGER.error("DConfig parse property key error,please check the key {}!", key, e);
                     }
                 }
-
-
             }
         }
     }
-
 
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         return bean;

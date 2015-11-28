@@ -1,4 +1,4 @@
-package com.marvinswolrd.demo;
+package com.marvinswolrd.annotation.demo;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
