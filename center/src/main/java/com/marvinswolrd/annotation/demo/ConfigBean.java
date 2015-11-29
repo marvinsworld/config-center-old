@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConfigBean {
 
-    @Config("aaa")
+    //@Config("aaa")
     private String db;
 
-    @Config("${aaa}")
+    //@Config("${aaa}")
     private String db1;
 
 
@@ -32,7 +32,7 @@ public class ConfigBean {
         return db1;
     }
 
-    @Config("${aaa}")
+    //@Config("${aaa}")
     public void setDb1(String db1) {
         this.db1 = db1;
     }

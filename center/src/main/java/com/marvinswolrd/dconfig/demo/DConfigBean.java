@@ -13,13 +13,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class DConfigBean {
 
-    @DConfig("db1")
+    @DConfig("config.center.db1")
     private String db1;
 
-    @DConfig("db2")
+    @DConfig("config.center.db2")
     private String db2;
 
-    @DConfig("db3")
+    @DConfig("config.center.db3")
     private String db3;
 
     public String getDb1() {

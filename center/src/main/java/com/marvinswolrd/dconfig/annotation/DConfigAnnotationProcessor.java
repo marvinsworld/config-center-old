@@ -2,6 +2,8 @@ package com.marvinswolrd.dconfig.annotation;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.marvinswolrd.center.reg.RegisterCenter;
+import org.apache.curator.framework.CuratorFramework;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -28,6 +30,8 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
     private long timeout;
     private boolean ignoreResourceNotFound;
     private Properties properties;
+
+
 
     public void setTimeout(long timeout) {
         this.timeout = timeout;
@@ -84,10 +88,22 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
      * 解析字段
      */
     private void parseFields(Object bean, Field[] fields) {
+        RegisterCenter configCenter = new RegisterCenter();
+
+        CuratorFramework client = configCenter.createClient();
+        client.start();
+
         for (Field field : fields) {
             DConfig annotation = (DConfig) AnnotationUtils.getAnnotation(field, DConfig.class);
             if (annotation != null) {
                 String key = annotation.value();
+
+                try {
+                    String zkValue = new String(client.getData().forPath("/" + key));
+                    System.out.println(zkValue);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 if (Strings.isNullOrEmpty(key)) {
                     LOGGER.error("DConfig annotation key must have a name!");

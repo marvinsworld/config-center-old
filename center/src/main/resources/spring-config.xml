@@ -13,11 +13,11 @@
 
     <!-- mvc controller -->
     <context:annotation-config/>
-    <context:component-scan base-package="com.marvinswolrd"/>
+    <context:component-scan base-package="com.marvinswolrd.dconfig"/>
 
     <!-- 如果配置冲突以最后一个为准 -->
     <dconfig:config files="dconfig1.properties,dconfig2.properties"/>
-    <dconfig:config files="dconfig/dconfig3.properties"/>
+    <!--<dconfig:config files="dconfig/dconfig3.properties"/>-->
 
 
     <!--<context:component-scan base-package="com.marvinswolrd">-->
