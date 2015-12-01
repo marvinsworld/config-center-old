@@ -14,12 +14,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegisterCenter {
 
-
-    public CuratorFramework createClient() {
+    public static CuratorFramework createClient() {
 
         CuratorFramework client = CuratorFrameworkFactory.builder().connectString("192.168.8.3:2181").sessionTimeoutMs(5000)
                 .retryPolicy(new ExponentialBackoffRetry(1000, 3))
-                .namespace("centerSpace0")
+                //.namespace("centerSpace0")
                 .build();
 
 //        RetryPolicy policy = new ExponentialBackoffRetry(1000, 3);

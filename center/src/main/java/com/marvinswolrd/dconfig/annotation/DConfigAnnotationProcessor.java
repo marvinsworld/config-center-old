@@ -2,8 +2,6 @@ package com.marvinswolrd.dconfig.annotation;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.marvinswolrd.center.reg.RegisterCenter;
-import org.apache.curator.framework.CuratorFramework;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -27,11 +25,10 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
     private static final Logger LOGGER = LoggerFactory.getLogger(DConfigAnnotationProcessor.class);
 
     private final String[] files;
+    private String namespace;
     private long timeout;
     private boolean ignoreResourceNotFound;
     private Properties properties;
-
-
 
     public void setTimeout(long timeout) {
         this.timeout = timeout;
@@ -53,9 +50,10 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
         return ignoreResourceNotFound;
     }
 
-    public DConfigAnnotationProcessor(String... files) {
+    public DConfigAnnotationProcessor(String[] files, String namespace) {
         Preconditions.checkArgument((files != null) && (files.length > 0), "DConfig files property must be not null!");
         this.files = files;
+        this.namespace = namespace;
 
         properties = new Properties();
         for (String file : files) {
@@ -88,22 +86,23 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
      * 解析字段
      */
     private void parseFields(Object bean, Field[] fields) {
-        RegisterCenter configCenter = new RegisterCenter();
 
-        CuratorFramework client = configCenter.createClient();
-        client.start();
+        //RegisterCenter configCenter = new RegisterCenter();
+
+//        CuratorFramework client = configCenter.createClient();
+//        client.start();
 
         for (Field field : fields) {
             DConfig annotation = (DConfig) AnnotationUtils.getAnnotation(field, DConfig.class);
             if (annotation != null) {
                 String key = annotation.value();
 
-                try {
-                    String zkValue = new String(client.getData().forPath("/" + key));
-                    System.out.println(zkValue);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    String zkValue = new String(client.getData().forPath("/" + key));
+//                    System.out.println(zkValue);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
 
                 if (Strings.isNullOrEmpty(key)) {
                     LOGGER.error("DConfig annotation key must have a name!");
@@ -125,5 +124,13 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
 
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         return bean;
+    }
+
+    public String getNamespace() {
+        return namespace;
+    }
+
+    public void setNamespace(String namespace) {
+        this.namespace = namespace;
     }
 }

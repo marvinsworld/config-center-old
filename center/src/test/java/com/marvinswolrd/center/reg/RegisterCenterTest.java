@@ -36,7 +36,7 @@ public class RegisterCenterTest {
 
         System.out.println("getNamespace=" + client.getNamespace());
 
-        getChildrenPath(client, "");
+        getChildrenPath(client, "/");
 
 
 //        List<String> paths=client.getChildren().forPath("");
@@ -61,6 +61,10 @@ public class RegisterCenterTest {
 
         for (String p : paths) {
             System.out.println(p);
+            if(path.equals("/")){
+                path="";
+            }
+
             getChildrenPath(client, path +"/"+ p);
         }
     }

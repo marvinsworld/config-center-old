@@ -31,6 +31,12 @@ class DConfigNamespaceHandler extends NamespaceHandlerSupport {
                 String[] ids = StringUtils.commaDelimitedListToStringArray(location);
                 builder.addConstructorArgValue(ids);
             }
+
+            String namespace = element.getAttribute("namespace");
+            if (StringUtils.hasLength(namespace)) {
+                builder.addConstructorArgValue(namespace);
+            }
+
 //            String order = element.getAttribute("order");
 //            if (StringUtils.hasLength(order)) {
 //                builder.addPropertyValue("order", Integer.valueOf(order));
