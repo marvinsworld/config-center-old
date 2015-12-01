@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="false">
     <!-- 设置日志输出根目录 -->
-    <property name="log.dir" value="${catalina.base}/logs"/>
+    <property name="log.dir" value="d:/logs"/>
 
     <property name="stdout-pattern" value="[%p] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t][%c]%C:%L - %m %n"/>
     <!-- 文件历史数 -->
