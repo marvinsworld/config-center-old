@@ -72,6 +72,9 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
         parseMethods(bean, bean.getClass().getDeclaredMethods());
         parseFields(bean, bean.getClass().getDeclaredFields());
         super.processInjection(bean);
+
+//                NodeListener nodeListener = (NodeListener) SpringContextUtil.getBean("NodeListener");
+//        System.out.println("----------"+nodeListener);
         return bean;
     }
 
@@ -86,6 +89,7 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
      * 解析字段
      */
     private void parseFields(Object bean, Field[] fields) {
+
 
         //RegisterCenter configCenter = new RegisterCenter();
 

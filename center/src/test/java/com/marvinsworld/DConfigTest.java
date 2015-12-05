@@ -2,7 +2,6 @@ package com.marvinsworld;
 
 import com.marvinswolrd.dconfig.demo.DConfigBean;
 import com.marvinswolrd.dconfig.demo.DConfigBean2;
-import com.marvinswolrd.spring.SpringBeanUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -36,7 +35,7 @@ public class DConfigTest {
     @Test
     public void test() {
 
-        DConfigBean ben = (DConfigBean) SpringBeanUtils.getBean("DConfigBean");
+        //DConfigBean ben = (DConfigBean) SpringBeanUtils.getBean("DConfigBean");
 
         System.out.println("db1=" + dConfigBean.getDb1());
         System.out.println("db2=" + dConfigBean.getDb2());
