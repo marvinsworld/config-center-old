@@ -5,7 +5,9 @@ import com.google.common.base.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.ReflectionUtils;
 
@@ -21,10 +23,10 @@ import java.util.Properties;
  * @version V1.0
  * @since 2015/8/23 15:57
  */
-public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProcessor {
+public class DConfigAnnotationProcessor extends ApplicationObjectSupport implements BeanPostProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(DConfigAnnotationProcessor.class);
 
-    private final String[] files;
+    private String[] files;
     private String namespace;
     private long timeout;
     private boolean ignoreResourceNotFound;
@@ -71,7 +73,7 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
         //super.postProcessBeforeInitialization(bean,beanName);
         parseMethods(bean, bean.getClass().getDeclaredMethods());
         parseFields(bean, bean.getClass().getDeclaredFields());
-        super.processInjection(bean);
+        //super.processInjection(bean);
 
 //                NodeListener nodeListener = (NodeListener) SpringContextUtil.getBean("NodeListener");
 //        System.out.println("----------"+nodeListener);
@@ -89,8 +91,8 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
      * 解析字段
      */
     private void parseFields(Object bean, Field[] fields) {
-
-
+        System.out.println(getApplicationContext());
+        System.out.println("111");
         //RegisterCenter configCenter = new RegisterCenter();
 
 //        CuratorFramework client = configCenter.createClient();
@@ -137,4 +139,7 @@ public class DConfigAnnotationProcessor extends AutowiredAnnotationBeanPostProce
     public void setNamespace(String namespace) {
         this.namespace = namespace;
     }
+
+    private ApplicationContext context;
+
 }

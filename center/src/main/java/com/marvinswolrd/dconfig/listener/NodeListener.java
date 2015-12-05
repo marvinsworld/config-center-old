@@ -4,7 +4,6 @@ import com.marvinswolrd.center.reg.RegisterCenter;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.NodeCache;
 import org.apache.curator.framework.recipes.cache.NodeCacheListener;
-import org.springframework.stereotype.Service;
 
 /**
  * Description:.
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @version V1.0
  * @since 2015/12/1 8:37
  */
-@Service
+//@Service
 public class NodeListener {
     static CuratorFramework client = RegisterCenter.createClient();
 
