@@ -2,6 +2,7 @@ package com.marvinswolrd.dconfig.annotation;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.marvinswolrd.dconfig.listener.NodeListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -91,8 +92,9 @@ public class DConfigAnnotationProcessor extends ApplicationObjectSupport impleme
      * 解析字段
      */
     private void parseFields(Object bean, Field[] fields) {
-        System.out.println(getApplicationContext());
-        System.out.println("111");
+        NodeListener nodeListener = (NodeListener) getApplicationContext().getBean("nodeListener");
+        System.out.println("----------" + nodeListener);
+
         //RegisterCenter configCenter = new RegisterCenter();
 
 //        CuratorFramework client = configCenter.createClient();
